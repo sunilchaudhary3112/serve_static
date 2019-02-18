@@ -1,0 +1,94 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Startform</title>
+
+    <!-- This is the main css file for the default Alta theme -->
+    <link rel="stylesheet" href="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/css/libs/oj/v3.2.0/alta/oj-alta-min.css" type="text/css"/>
+
+
+    <!-- This is where you would add any app specific styling -->
+    <link rel="stylesheet" href="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/css/libs/pcs/v1.1/alta/pcs-startform-min.css" type="text/css"/>
+
+    <!-- RequireJS configuration file -->
+    <script data-main="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/main/startform-main" src="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/js/libs/require/require.js"></script>
+<script>
+requirejs.config({
+    baseUrl: "https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/js",
+    paths:
+    {
+        'knockout': 'libs/knockout/knockout-3.4.0',
+	'jquery': 'libs/jquery/jquery-3.1.1.min',
+	'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0',
+	'ojs': 'libs/oj/v3.2.0/debug',
+	'ojL10n': 'libs/oj/v3.2.0/ojL10n',
+	'ojtranslations': 'libs/oj/v3.2.0/resources',
+	'text': 'libs/require/text',
+	'promise': 'libs/es6-promise/es6-promise-4.0.5.min',
+	'hammerjs': 'libs/hammer/hammer-2.0.8.min',
+	'signals': 'libs/js-signals/signals.min',
+	'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
+	'customElements': 'libs/webcomponents/CustomElements.min',
+	'proj4': 'libs/proj4js/dist/proj4',
+	'underscore': 'libs/underscore/underscore-1.8.3.min',
+  	'pcs' : 'libs/pcs/v1.1/min',
+    },
+    shim: {
+        'jquery': {
+            exports: ['jQuery', '$']
+        }
+    }
+});
+
+require(['jquery', 'pcs/pcs.startform' ],
+    function ($) {
+var tok = 'v.vikram.s.singh@oracle.com' + ':' + 'Or@cle1234567';
+        $.pcsConnection   = {
+              serverURL: 'https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com',
+			         authInfo: '',
+        };
+
+		   $.pcsConnection.authInfo = 'Basic ' + btoa(tok);
+        var startform = $('#startform');
+
+        $("#startform").startform({
+              startformData: {
+                processDefId: 'oracleinternalpcs~Pre_Travel_Authorization_App!1.0~TravelApproval',
+                processName: 'TravelApproval',
+                serviceName: 'TravelApproval.service',
+                title: 'Travel Auth(1.0)',
+                description: null,
+                operation: 'startEvent',
+               startType: 'START_PCS_FORM',
+                isDocsEnabled:true
+            },
+			//hideSubmit : self.hideSubmit(),
+			hideSave : true,
+			hideDiscard : true,
+			submitLabel : 'Submit',
+                        attachments:{},
+                        hideUploadLink : false,
+                        isDocsEnabled : false
+        });
+
+          // Defining the event listeners --
+        startform.on('startform:discard', function(event, data){
+
+        });
+
+        startform.on('startform:submit', function(event, data,instance){
+
+        });
+
+        startform.on('startform:save', function(event, data,instance){
+
+        });
+    }
+);
+
+</script>
+</head>
+<body>
+<div id="startform"></div>
+</body>
+</html>
