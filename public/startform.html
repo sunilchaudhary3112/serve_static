@@ -1,0 +1,77 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Startform</title>
+
+    <!-- This is the main css file for the default Alta theme -->
+    <link rel="stylesheet" href="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/css/libs/oj/v3.2.0/alta/oj-alta-min.css" type="text/css"/>
+
+
+    <!-- This is where you would add any app specific styling -->
+    <link rel="stylesheet" href="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/css/libs/pcs/v1.1/alta/pcs-startform-min.css" type="text/css"/>
+
+    <!-- RequireJS configuration file -->
+    <script data-main="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/main/startform-main" src="https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/js/libs/require/require.js"></script>
+<script>
+/**
+ * Created by nisabhar on 3/17/2016.
+ */
+var baseUrl = "https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com/ic/pub/components/js";
+
+require([baseUrl+'/libs/pcs/config/pcs-require-config.js'], function(config) {
+    config.configPaths(baseUrl, '2.0', true);
+
+    require(['jquery', 'pcs/pcs.startform'],
+        function ($) { // this callback gets executed when all required modules are loaded
+
+            var pcsUtil = require('pcs/util/pcsUtil');
+
+            // Read url parameters
+            var options = pcsUtil.getUrlParametersObject();
+
+            //replace:internaljs
+            $.pcsConnection = {
+                serverURL: 'https://erpcatoic-sehubemeaprod.integration.ocp.oraclecloud.com',
+                authInfo: 'Basic di52aWtyYW0ucy5zaW5naEBvcmFjbGUuY29tOk9yQGNsZTEyMzQ1Njc='
+                //authInfo: 'Basic bmF0aGFuLmFuZ3N0YWR0QG9yYWNsZS5jb206cGNzUE0yMDE4MDE='
+            };
+
+            if ($.isEmptyObject(options) || $.isEmptyObject(options.startformData)) {
+                // options = {
+                //     startformData: {
+                //         processDefId: 'oracleinternalpcs~Pre_Travel_Authorization_App!1.0~TravelApproval',
+                //         processName: 'TravelApproval',
+                //         serviceName: 'TravelApproval.service',
+                //         title: 'Travel Auth(1.0)',
+                //         description: null,
+                //         operation: 'startEvent'
+                //     }
+                // };  
+                options = {
+                    startformData: {
+                        processDefId: 'oracleinternalpcs~Pre_Travel_Authorization_App!1.0~TravelApproval',
+                        processName: 'TravelApproval',
+                        serviceName: 'TravelApproval.service',
+                        title: 'Travel Auth(1.0)',
+                        description:null,
+                        operation: 'startEvent'
+                    }
+                };  
+            }
+            //endreplace
+
+            var element = $("#startform");
+            var loadComponent = function () {
+                element.startform(options);
+            };
+
+            pcsUtil.initComponentForIFrame(options, loadComponent, element);
+        }
+    );
+});
+</script>
+</head>
+<body>
+<div id="startform"></div>
+</body>
+</html>
